@@ -9,7 +9,7 @@
         <div class="col-auto me-auto"><h3 class="st-table-title">{{title}}</h3></div>
         <div class="col-auto">
   
-          <div *ngIf="staticPagination else searchTemplate" class="row">
+          <div *ngIf="staticPagination else customSearchTemplate" class="row">
             <div class="col-auto me-auto">
               <input #searchInput type="text" class="form-control border border-3" id="search"
                      placeholder="Search"
@@ -27,7 +27,7 @@
             </div>
           </div>
   
-          <ng-template #searchTemplate>
+          <ng-template #customSearchTemplate>
             <!-- Custom server side search template  -->
             <ng-container *ngIf="searchTemplate">
               <ng-container *ngTemplateOutlet="searchTemplate"></ng-container>

@@ -2,7 +2,7 @@ import {Directive, EventEmitter, HostBinding, HostListener, Input, Output} from 
 import { Column, SortDirection, SortEvent, SortRotation } from '../ngb5-simple-table.model';
 
 @Directive({
-  selector: 'th[appStColumnSort]'
+  selector: 'th[libStColumnSort]'
 })
 export class StColumnSortDirective {
 

@@ -72,7 +72,8 @@ export class Ngb5SimpleTableComponent implements OnInit, OnChanges {
       this.dataList = [];
     }
     if (this.dataList.length <= 0) {
-      this.noDataColumnCount = this.columns?.length || 0 + Object.keys(this.actionTemplate)?.length || 0;
+      const actionTemplateKeysCount = this.actionTemplate ? Object.keys(this.actionTemplate)?.length : 0;
+      this.noDataColumnCount = this.columns?.length || 0 + actionTemplateKeysCount;
     }
     if (this.staticPagination) {
       this.tempFullDataList = _cloneDeep(this.dataList);

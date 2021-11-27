@@ -12,7 +12,7 @@ export const PAGINATION_CONTROL_VALUE_ACCESSOR: Provider = {
  * Referenced taken from package ngx-bootstrap to create this pagination Component class.
  */
 @Component({
-  selector: 'app-st-pagination',
+  selector: 'lib-st-pagination',
   templateUrl: './st-pagination.component.html',
   styleUrls: ['./st-pagination.component.scss'],
   providers: [PAGINATION_CONTROL_VALUE_ACCESSOR]
