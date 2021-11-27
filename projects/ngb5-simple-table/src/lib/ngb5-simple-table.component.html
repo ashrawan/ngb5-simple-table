@@ -1,0 +1,154 @@
+<div class="row">
+    <ng-container *ngTemplateOutlet="tableContent"></ng-container>
+  </div>
+  
+  <ng-template #tableContent>
+  
+    <ng-container>
+      <div class="row my-1">
+        <div class="col-auto me-auto"><h3 class="st-table-title">{{title}}</h3></div>
+        <div class="col-auto">
+  
+          <div *ngIf="staticPagination else searchTemplate" class="row">
+            <div class="col-auto me-auto">
+              <input #searchInput type="text" class="form-control border border-3" id="search"
+                     placeholder="Search"
+                     [(ngModel)]="searchTerm"
+                     (ngModelChange)="offlineSearchInTable()"
+                     [ngModelOptions]="{standalone: true}"
+                     required/>
+            </div>
+            <div class="col-auto">
+              <div class="fs-3" style="cursor: pointer"
+                   (click)="toggleCaseSensitive()">
+                <i *ngIf="isCaseSensitiveSearch; else noCaseSensitive" class="bi bi-badge-cc-fill text-primary"></i>
+                <ng-template #noCaseSensitive><i class="bi bi-badge-cc"></i></ng-template>
+              </div>
+            </div>
+          </div>
+  
+          <ng-template #searchTemplate>
+            <!-- Custom server side search template  -->
+            <ng-container *ngIf="searchTemplate">
+              <ng-container *ngTemplateOutlet="searchTemplate"></ng-container>
+            </ng-container>
+          </ng-template>
+  
+        </div>
+      </div>
+    </ng-container>
+  
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+        <tr>
+  
+          <ng-container *ngFor="let column of columns">
+            <th style="cursor: pointer" *ngIf="!column.hide" scope="col" appStColumnSort [column]="column"
+                direction="{{sortDirection}}" (sort)="onSortTriggered($event)">
+              <span>{{column.label}}</span>
+              <span class="px-1">
+                <span *ngIf="sortColumn.id === column.id; else defaultSort">
+                  <i [ngClass]="sortDirection === 'asc' ? 'bi bi-sort-alpha-down' : 'bi bi-sort-alpha-down-alt'"></i>
+                </span>
+                <ng-template #defaultSort><span class="pe-3"></span></ng-template>
+              </span>
+            </th>
+          </ng-container>
+  
+          <ng-container *ngFor="let key of actionTemplate | objKeys; let i = index;">
+            <th [class]="i === 0 ? 'border-left-separator': ''"><span> {{ key }}</span></th>
+          </ng-container>
+  
+        </tr>
+        </thead>
+  
+        <tbody>
+  
+        <ng-container *ngIf="dataList && dataList.length > 0 else noDataTemplate">
+          <ng-container *ngFor="let item of (!staticPagination ? dataList : (dataList | slice: (currentPage-1) * pageSize : currentPage * pageSize ) );
+          let i = index">
+            <tr>
+  
+              <ng-container *ngFor="let column of columns; let i = index">
+                <!-- Columns Data Display STARTS -->
+                <ng-container *ngIf="!column.hide">
+                  <ng-container [ngSwitch]="column.type">
+  
+                    <ng-container *ngSwitchCase="ColumnType.DATE">
+                      <td>
+                      <span class="{{column.cssClasses}}"
+                            [ngClass]="(column.cssValueMap | objKeys ).length > 0 ? column.cssValueMap[item[column.name]] : '' ">
+                        {{item[column.name] | date}}</span>
+                      </td>
+                    </ng-container>
+  
+                    <ng-container *ngSwitchCase="ColumnType.OBJECT">
+                      <td>
+                      <span class="{{column.cssClasses}}"
+                            [ngClass]="(column.cssValueMap | objKeys ).length > 0 ? column.cssValueMap[item[column.name]] : '' ">
+                        {{getObjValueFromPath(item, column.bindKeys)}}</span>
+                      </td>
+                    </ng-container>
+  
+                    <ng-container *ngSwitchDefault>
+                      <td>
+                      <span
+                        class="{{column.cssClasses}}"
+                        [ngClass]="(column.cssValueMap | objKeys ).length > 0 ? column.cssValueMap[item[column.name]] : '' ">
+                      {{item[column.name] != null ? item[column.name] : '---'}}</span>
+                      </td>
+                    </ng-container>
+  
+                  </ng-container>
+                </ng-container>
+                <!-- Columns Data Display END -->
+              </ng-container>
+  
+              <!-- Any Passed Action Templates  -->
+              <ng-container *ngFor="let key of actionTemplate | objKeys; let i = index;">
+                <td [class]="i === 0 ? 'border-left-separator': ''">
+                  <ng-container *ngTemplateOutlet="actionTemplate[key]; context: {$implicit: item}"></ng-container>
+                </td>
+              </ng-container>
+  
+            </tr>
+          </ng-container>
+        </ng-container>
+  
+        <ng-template #noDataTemplate>
+          <tr>
+            <td [attr.colspan]="noDataColumnCount" class="text-danger text-center">
+              <span>  </span>
+            </td>
+          </tr>
+        </ng-template>
+  
+        </tbody>
+      </table>
+  
+    </div>
+  
+    <!-- Pagination Block  -->
+    <div *ngIf="totalElements > 0" class="d-flex justify-content-end">
+  
+      <app-st-pagination [totalItems]="totalElements"
+                         [(ngModel)]="currentPage"
+                         [itemsPerPage]="pageSize"
+                         [maxSize]="10"
+                         [rotate]="true"
+                         [boundaryLinks]="true"
+                         (pageChanged)="onPageChangeTriggered($event)">
+      </app-st-pagination>
+  
+      <div class="d-flex align-items-center mb-3 ms-3">
+        <select class="form-select" name="pageSize" [(ngModel)]="pageSize" (ngModelChange)="onPageSizeChange()">
+          <option [ngValue]="2">2 per Page</option>
+          <option [ngValue]="5">5 per Page</option>
+          <option [ngValue]="10">10 per Page</option>
+        </select>
+      </div>
+  
+    </div>
+  
+  </ng-template>
