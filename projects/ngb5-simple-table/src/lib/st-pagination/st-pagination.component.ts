@@ -14,7 +14,6 @@ export const PAGINATION_CONTROL_VALUE_ACCESSOR: Provider = {
 @Component({
   selector: 'lib-st-pagination',
   templateUrl: './st-pagination.component.html',
-  styleUrls: ['./st-pagination.component.scss'],
   providers: [PAGINATION_CONTROL_VALUE_ACCESSOR]
 })
 export class StPaginationComponent implements ControlValueAccessor, OnInit {

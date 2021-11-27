@@ -29,7 +29,8 @@ export class Ngb5SimpleTableComponent implements OnInit, OnChanges {
   @Input() totalElements = 0; // Not required if "staticPagination = true"
 
   // Optional Fields
-  @Input() pageSize = 10;
+  @Input() pageSize = 5;
+  @Input() perPageOptions: number[] = [5, 20, 50];
   @Input() sortColumnName: string;
   @Input() searchTemplate: TemplateRef<any>;
   @Input() actionTemplate: { [columnName: string]: TemplateRef<any> };
@@ -40,6 +41,11 @@ export class Ngb5SimpleTableComponent implements OnInit, OnChanges {
    * Pgination is done on the full "dataList" using slicing operation
    */
   @Input() staticPagination = false;
+
+
+  // Optional Pagination Fields. TODO: Create NgbNavigationConfig interface and populate pagination fields
+  @Input() boundaryLinks = false; // false: first and last buttons will be hidden
+  @Input() directionLinks = true; // false: previous and next buttons will be hidden
 
   // Output
   @Output() sort = new EventEmitter<SortEvent>();

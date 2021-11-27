@@ -44,7 +44,7 @@
         <tr>
   
           <ng-container *ngFor="let column of columns">
-            <th style="cursor: pointer" *ngIf="!column.hide" scope="col" appStColumnSort [column]="column"
+            <th style="cursor: pointer" *ngIf="!column.hide" scope="col" libStColumnSort [column]="column"
                 direction="{{sortDirection}}" (sort)="onSortTriggered($event)">
               <span>{{column.label}}</span>
               <span class="px-1">
@@ -132,20 +132,21 @@
     <!-- Pagination Block  -->
     <div *ngIf="totalElements > 0" class="d-flex justify-content-end">
   
-      <app-st-pagination [totalItems]="totalElements"
+      <lib-st-pagination [totalItems]="totalElements"
                          [(ngModel)]="currentPage"
                          [itemsPerPage]="pageSize"
                          [maxSize]="10"
                          [rotate]="true"
-                         [boundaryLinks]="true"
+                         [boundaryLinks]="boundaryLinks"
+                         [directionLinks]="directionLinks"
                          (pageChanged)="onPageChangeTriggered($event)">
-      </app-st-pagination>
+      </lib-st-pagination>
   
       <div class="d-flex align-items-center mb-3 ms-3">
         <select class="form-select" name="pageSize" [(ngModel)]="pageSize" (ngModelChange)="onPageSizeChange()">
-          <option [ngValue]="2">2 per Page</option>
-          <option [ngValue]="5">5 per Page</option>
-          <option [ngValue]="10">10 per Page</option>
+            <option *ngFor="let pp of perPageOptions" [ngValue]="pp">
+                {{pp}} per Page
+            </option>
         </select>
       </div>
   
