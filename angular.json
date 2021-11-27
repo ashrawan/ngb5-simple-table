@@ -3,5 +3,46 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-  }
+    "ngb5-simple-table": {
+      "projectType": "library",
+      "root": "projects/ngb5-simple-table",
+      "sourceRoot": "projects/ngb5-simple-table/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/ngb5-simple-table/tsconfig.lib.json",
+            "project": "projects/ngb5-simple-table/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngb5-simple-table/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngb5-simple-table/src/test.ts",
+            "tsConfig": "projects/ngb5-simple-table/tsconfig.spec.json",
+            "karmaConfig": "projects/ngb5-simple-table/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngb5-simple-table/tsconfig.lib.json",
+              "projects/ngb5-simple-table/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "ngb5-simple-table"
 }

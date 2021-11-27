@@ -10,6 +10,12 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
+    "paths": {
+      "ngb5-simple-table": [
+        "dist/ngb5-simple-table/ngb5-simple-table",
+        "dist/ngb5-simple-table"
+      ]
+    },
     "target": "es2015",
     "module": "es2020",
     "lib": [
