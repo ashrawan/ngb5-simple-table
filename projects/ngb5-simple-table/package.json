@@ -1,6 +1,6 @@
 {
   "name": "ngb5-simple-table",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "description": "Simple datatable using Angular 11+ and Bootstrap 5.",
   "keywords": [
     "Angular 11+",
@@ -10,11 +10,8 @@
     "Searching",
     "Static/Dynamic Data Table"
   ],
-  "author": "https://github.com/ashrawan/ngb5-simple-table",
-  "repository": {
-    "type" : "git",
-    "url" : "github.com/ashrawan/ngb5-simple-table"
-  },
+  "author": "Shrawan Adhikari <ashrawan70@gmail.com>",
+  "repository": "https://github.com/ashrawan/ngb5-simple-table.git",
   "homepage" :"github.com/ashrawan/ngb5-simple-table",
   "peerDependencies": {
     "@angular/common": "^11.1.2",
