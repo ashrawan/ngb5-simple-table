@@ -4,9 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "npm run demo:serve",
-    "build": "npm run lib:build && npm demo:build",
-    "test": "npm run lib:lint && npm lib:test",
-    "e2e": "npm run lib:e2e && npm demo:e2e",
+    "build": "npm run lib:build && npm run demo:build",
+    "test": "npm run lib:test && npm run demo:test",
+    "e2e": "npm run lib:e2e && npm run demo:e2e",
     "lib:lint": "ng lint ngb5-simple-table",
     "lib:build": "ng build ngb5-simple-table -c production",
     "lib:build-watch": "ng build ngb5-simple-table --watch",
@@ -16,7 +16,9 @@
     "demo:serve": "ng serve demo --host 0.0.0.0",
     "demo:lint": "ng lint demo",
     "demo:build": "ng build demo -c production",
-    "demo:e2e": "ng e2e demo"
+    "demo:e2e": "ng e2e demo",
+
+    "demo:gh-pages-build": "ng build demo --output-path docs --base-href /ngb5-simple-table/"
   },
   "private": true,
   "dependencies": {
