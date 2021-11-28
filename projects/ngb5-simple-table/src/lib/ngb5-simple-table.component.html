@@ -39,9 +39,8 @@
     </ng-container>
   
     <div [class.table-responsive]="tableUI.tableResponsive">
-      <table class="table"
-      [ngClass]="{'table-bordered': tableUI.tableBordered, 'table-hover': tableUI.tableHover, 'table-striped': tableUI.tableStripped}"
-      [ngclass]="tableUI.additionalCSSClass">
+      <table [ngClass]="{'table': true, 'table-bordered': tableUI.tableBordered, 'table-hover': tableUI.tableHover, 'table-striped': tableUI.tableStripped}"
+      class="{{tableUI.additionalCSSClass}}">
         <thead>
           <tr>
     
