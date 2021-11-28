@@ -16,7 +16,6 @@
     "demo:serve": "ng serve demo --host 0.0.0.0",
     "demo:lint": "ng lint demo",
     "demo:build": "ng build demo -c production",
-    "demo:publish": "gh-pages --dist dist/demo --branch gh-page --repo https://github.com/ashrawan/ngb5-simple-table.git",
     "demo:e2e": "ng e2e demo"
   },
   "private": true,
@@ -39,8 +38,8 @@
     "@angular/compiler-cli": "~11.1.2",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
+    "angular-cli-ghpages": "^1.0.0",
     "codelyzer": "^6.0.0",
-    "gh-pages": "^3.2.3",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~5.2.0",
