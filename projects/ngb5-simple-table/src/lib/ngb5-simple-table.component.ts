@@ -12,10 +12,10 @@ import {
 } from '@angular/core';
 import {get as _get} from 'lodash';
 import {cloneDeep as _cloneDeep} from 'lodash';
-import { Column, ColumnType, SortDirection, SortEvent, TableStateEvent } from './ngb5-simple-table.model';
+import { Column, ColumnType, SortDirection, SortEvent, TableStateEvent, TableUI } from './ngb5-simple-table.model';
 
 @Component({
-  selector: 'lib-ngb5-simple-table',
+  selector: 'ngb5-simple-table',
   templateUrl: './ngb5-simple-table.component.html',
   styles: [  ]
 })
@@ -42,8 +42,9 @@ export class Ngb5SimpleTableComponent implements OnInit, OnChanges {
    */
   @Input() staticPagination = false;
 
-
-  // Optional Pagination Fields. TODO: Create NgbNavigationConfig interface and populate pagination fields
+  // ===== Optional UI Display ===========
+  @Input() tableUI: TableUI = new TableUI();
+  // Pagination Fields. TODO: Create NgbNavigationConfig interface and populate pagination fields
   @Input() boundaryLinks = false; // false: first and last buttons will be hidden
   @Input() directionLinks = true; // false: previous and next buttons will be hidden
 
@@ -93,7 +94,7 @@ export class Ngb5SimpleTableComponent implements OnInit, OnChanges {
   }
 
   onSortTriggered(sortEvent: SortEvent): void {
-    console.log('onSortTriggered ', sortEvent);
+    // console.log('onSortTriggered ', sortEvent);
     this.sortColumn = sortEvent.column;
     this.sortColumnName = sortEvent.column.name;
     this.sortDirection = sortEvent.direction;
@@ -121,13 +122,13 @@ export class Ngb5SimpleTableComponent implements OnInit, OnChanges {
 
 
   onPageChangeTriggered($event): void {
-    console.log('onPageChangeTriggered ', this.currentPage);
+    // console.log('onPageChangeTriggered ', this.currentPage);
     this.pageChange.emit(this.currentPage);
     this.prepareAndEmitTableStateEvent();
   }
 
   onPageSizeChange(): void {
-    console.log('onPageSizeChange ', this.pageSize);
+    // console.log('onPageSizeChange ', this.pageSize);
     this.prepareAndEmitTableStateEvent();
   }
 
@@ -137,7 +138,7 @@ export class Ngb5SimpleTableComponent implements OnInit, OnChanges {
       pageNo: this.currentPage,
       pageSize: this.pageSize,
     };
-    console.log('emitting table state event ', tableStateEvent);
+    // console.log('emitting table state event ', tableStateEvent);
     this.changeDetection.detectChanges();
     this.tableStateEvent.emit(tableStateEvent);
   }

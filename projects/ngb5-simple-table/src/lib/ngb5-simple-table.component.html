@@ -19,10 +19,10 @@
                      required/>
             </div>
             <div class="col-auto">
-              <div class="fs-3" style="cursor: pointer"
-                   (click)="toggleCaseSensitive()">
-                <i *ngIf="isCaseSensitiveSearch; else noCaseSensitive" class="bi bi-badge-cc-fill text-primary"></i>
-                <ng-template #noCaseSensitive><i class="bi bi-badge-cc"></i></ng-template>
+              <div class="fs-3" style="cursor: pointer" (click)="toggleCaseSensitive()">
+                <ng-container *ngIf="isCaseSensitiveSearch; else caseSensitiveFALSE">
+                  <ng-container *ngTemplateOutlet="caseSensitiveTRUE"></ng-container>
+                </ng-container>
               </div>
             </div>
           </div>
@@ -38,29 +38,33 @@
       </div>
     </ng-container>
   
-    <div class="table-responsive">
-      <table class="table table-hover">
+    <div [class.table-responsive]="tableUI.tableResponsive">
+      <table class="table"
+      [ngClass]="{'table-bordered': tableUI.tableBordered, 'table-hover': tableUI.tableHover, 'table-striped': tableUI.tableStripped}"
+      [ngclass]="tableUI.additionalCSSClass">
         <thead>
-        <tr>
-  
-          <ng-container *ngFor="let column of columns">
-            <th style="cursor: pointer" *ngIf="!column.hide" scope="col" libStColumnSort [column]="column"
-                direction="{{sortDirection}}" (sort)="onSortTriggered($event)">
-              <span>{{column.label}}</span>
-              <span class="px-1">
-                <span *ngIf="sortColumn.id === column.id; else defaultSort">
-                  <i [ngClass]="sortDirection === 'asc' ? 'bi bi-sort-alpha-down' : 'bi bi-sort-alpha-down-alt'"></i>
+          <tr>
+    
+            <ng-container *ngFor="let column of columns">
+              <th style="cursor: pointer" *ngIf="!column.hide" scope="col" libStColumnSort [column]="column"
+                  direction="{{sortDirection}}" (sort)="onSortTriggered($event)">
+                <span>{{column.label}}</span>
+                <span class="px-1">
+                  <span *ngIf="sortColumn.id === column.id; else defaultSort">
+                    <ng-container *ngIf="sortDirection === 'asc'; else sortAlphaDownAlt">
+                      <ng-container *ngTemplateOutlet="sortAlphaDown"></ng-container>
+                    </ng-container>
+                  </span>
+                  <ng-template #defaultSort><span class="pe-3"></span></ng-template>
                 </span>
-                <ng-template #defaultSort><span class="pe-3"></span></ng-template>
-              </span>
-            </th>
-          </ng-container>
-  
-          <ng-container *ngFor="let key of actionTemplate | objKeys; let i = index;">
-            <th [class]="i === 0 ? 'border-left-separator': ''"><span> {{ key }}</span></th>
-          </ng-container>
-  
-        </tr>
+              </th>
+            </ng-container>
+    
+            <ng-container *ngFor="let key of actionTemplate | objKeys; let i = index;">
+              <th [class]="i === 0 ? 'border-left-separator': ''"><span> {{ key }}</span></th>
+            </ng-container>
+    
+          </tr>
         </thead>
   
         <tbody>
@@ -153,3 +157,34 @@
     </div>
   
   </ng-template>
+
+
+<!-- Required Icons SVG: SortA-Z, SortZ-A, Case Sensitive (Used from bootstrap-icons) -->
+
+<ng-template #caseSensitiveFALSE>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-badge-cc" viewBox="0 0 16 16">
+    <path d="M3.708 7.755c0-1.111.488-1.753 1.319-1.753.681 0 1.138.47 1.186 1.107H7.36V7c-.052-1.186-1.024-2-2.342-2C3.414 5 2.5 6.05 2.5 7.751v.747c0 1.7.905 2.73 2.518 2.73 1.314 0 2.285-.792 2.342-1.939v-.114H6.213c-.048.615-.496 1.05-1.186 1.05-.84 0-1.319-.62-1.319-1.727v-.743zm6.14 0c0-1.111.488-1.753 1.318-1.753.682 0 1.139.47 1.187 1.107H13.5V7c-.053-1.186-1.024-2-2.342-2C9.554 5 8.64 6.05 8.64 7.751v.747c0 1.7.905 2.73 2.518 2.73 1.314 0 2.285-.792 2.342-1.939v-.114h-1.147c-.048.615-.497 1.05-1.187 1.05-.839 0-1.318-.62-1.318-1.727v-.743z"/>
+    <path d="M14 3a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h12zM2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2z"/>
+  </svg>
+</ng-template>
+
+<ng-template #caseSensitiveTRUE>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-badge-cc-fill" viewBox="0 0 16 16">
+    <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2zm3.027 4.002c-.83 0-1.319.642-1.319 1.753v.743c0 1.107.48 1.727 1.319 1.727.69 0 1.138-.435 1.186-1.05H7.36v.114c-.057 1.147-1.028 1.938-2.342 1.938-1.613 0-2.518-1.028-2.518-2.729v-.747C2.5 6.051 3.414 5 5.018 5c1.318 0 2.29.813 2.342 2v.11H6.213c-.048-.638-.505-1.108-1.186-1.108zm6.14 0c-.831 0-1.319.642-1.319 1.753v.743c0 1.107.48 1.727 1.318 1.727.69 0 1.139-.435 1.187-1.05H13.5v.114c-.057 1.147-1.028 1.938-2.342 1.938-1.613 0-2.518-1.028-2.518-2.729v-.747c0-1.7.914-2.751 2.518-2.751 1.318 0 2.29.813 2.342 2v.11h-1.147c-.048-.638-.505-1.108-1.187-1.108z"/>
+  </svg>
+</ng-template>
+
+<ng-template #sortAlphaDown>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-alpha-down" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M10.082 5.629 9.664 7H8.598l1.789-5.332h1.234L13.402 7h-1.12l-.419-1.371h-1.781zm1.57-.785L11 2.687h-.047l-.652 2.157h1.351z"/>
+    <path d="M12.96 14H9.028v-.691l2.579-3.72v-.054H9.098v-.867h3.785v.691l-2.567 3.72v.054h2.645V14zM4.5 2.5a.5.5 0 0 0-1 0v9.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L4.5 12.293V2.5z"/>
+  </svg>
+</ng-template>
+
+<ng-template #sortAlphaDownAlt>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-alpha-down-alt" viewBox="0 0 16 16">
+    <path d="M12.96 7H9.028v-.691l2.579-3.72v-.054H9.098v-.867h3.785v.691l-2.567 3.72v.054h2.645V7z"/>
+    <path fill-rule="evenodd" d="M10.082 12.629 9.664 14H8.598l1.789-5.332h1.234L13.402 14h-1.12l-.419-1.371h-1.781zm1.57-.785L11 9.688h-.047l-.652 2.156h1.351z"/>
+    <path d="M4.5 2.5a.5.5 0 0 0-1 0v9.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L4.5 12.293V2.5z"/>
+  </svg>
+</ng-template>

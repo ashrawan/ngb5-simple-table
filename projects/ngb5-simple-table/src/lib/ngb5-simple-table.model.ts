@@ -17,7 +17,7 @@ export enum ColumnType {
   STRING = 'string', NUMBER = 'number', DATE = 'date', LINK = 'link', OBJECT = 'OBJECT', OTHER = 'other'
 }
 
-export class Column {
+export interface Column {
   id: number;
   name: string;
   label: string;
@@ -28,5 +28,15 @@ export class Column {
   sortable?: boolean;
   filterable?: boolean;
   hide?: boolean;
-  parseValue?: (func: () => string ) => string;
+  parseValue?: (func: (item) => string ) => string;
+}
+
+// Table Display Properties
+export class TableUI {
+  tableBordered: boolean = true;
+  tableResponsive: boolean = true;
+  tableHover: boolean = true;
+  tableStripped: boolean = true;
+  additionalCSSClass: string = '';
+  // TODO Pagination Display Config
 }
