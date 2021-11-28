@@ -16,7 +16,6 @@
     "demo:serve": "ng serve demo --host 0.0.0.0",
     "demo:lint": "ng lint demo",
     "demo:build": "ng build demo -c production",
-    "demo:publish": "gh-pages --dist dist/demo --branch gh-page --repo https://github.com/ashrawan/ngb5-simple-table.git",
     "demo:e2e": "ng e2e demo"
   },
   "private": true,
