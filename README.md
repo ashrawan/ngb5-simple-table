@@ -4,7 +4,7 @@
     <h1>Ngb5SimpleTable</h1>
 </div>
 </a>
-
+<p align="center">(Angular + Bootstrap 5)</p>
 
 <div align="center">
     <h2>&#60;ngb5-simple-table /&#62;</h2>
@@ -23,7 +23,7 @@ The Quick way to integrate <strong>Simple Datatable</strong> with <strong>Sortab
 
 ## Getting Started
 
-__ngb5-simple-table__ provides simple datatable component powered by Angular. It uses Bootstrap 5 so, you need to include Bootstrap 5 with your angular app or use CSS link.
+__ngb5-simple-table__  provides simple datatable component powered by Angular. It uses Bootstrap 5 so, you need to include Bootstrap 5 with your angular app or use CSS link.
 
 ## Installation
 

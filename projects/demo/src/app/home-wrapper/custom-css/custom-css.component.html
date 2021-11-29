@@ -1,0 +1,21 @@
+<div class="container">
+
+  <h3 class="text-center">Examples: Object Binding and CSS append</h3>
+
+  <div class="mb-2" *ngIf="users && users.length > 0">
+    <ngb5-simple-table [title]="'User List'"
+                       [dataList]="users"
+                       [columns]="usersColumnsMap"
+                       [staticPagination]="true">
+    </ngb5-simple-table>
+  </div>
+
+  <hr/>
+
+  <app-code-showcase [CS_JSON_DATA]="CS_JSON_DATA"
+                     [CS_HTML_TEMPLATE]="CS_HTML_TEMPLATE"
+                     [CS_TYPESCRIPT]="CS_TYPESCRIPT">
+  </app-code-showcase>
+
+
+</div>

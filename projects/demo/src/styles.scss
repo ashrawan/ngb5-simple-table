@@ -1,0 +1,31 @@
+
+@import "~prismjs/plugins/toolbar/prism-toolbar.css";
+@import "~prismjs/themes/prism-okaidia";
+
+
+table {
+  .border-left-separator {
+    border-left: 2px solid #c4bbdb;
+  }
+}
+
+.dash-sidebar, .main-navbar {
+  background-color: #443c54;
+
+  a {
+    color: #ffffff;
+    &:hover, :active {
+      color: #ffb9b9;
+    }
+
+  }
+}
+.main-navbar {
+  opacity: 0.95;
+}
+
+.nav-pills .nav-link.active {
+  color: #ffb9b9;
+  background-color: transparent;
+  border-bottom: 2px solid #ff4242;
+}

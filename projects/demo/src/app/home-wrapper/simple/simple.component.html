@@ -1,0 +1,22 @@
+
+<div class="container">
+
+    <h3 class="text-center">Example: Simple Table Usage</h3>
+
+    <div class="mb-2">
+        <ngb5-simple-table  [title]="'Todo List'"
+                            [dataList]="JSONTodoList"
+                            [columns]="todoColumns"
+                            [staticPagination]="true">
+        </ngb5-simple-table>
+    </div>
+
+    <hr/>
+
+    <app-code-showcase [CS_JSON_DATA]="CS_JSON_DATA"
+                       [CS_HTML_TEMPLATE]="CS_HTML_TEMPLATE"
+                       [CS_TYPESCRIPT]="CS_TYPESCRIPT">
+    </app-code-showcase>
+
+
+</div>

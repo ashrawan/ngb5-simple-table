@@ -4,6 +4,7 @@
     <h1>Ngb5SimpleTable</h1>
 </div>
 </a>
+<p align="center">(Angular + Bootstrap 5)</p>
 
 
 <div align="center">

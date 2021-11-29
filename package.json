@@ -17,7 +17,6 @@
     "demo:lint": "ng lint demo",
     "demo:build": "ng build demo -c production",
     "demo:e2e": "ng e2e demo",
-
     "demo:gh-pages-build": "ng build demo --output-path docs --base-href /ngb5-simple-table/"
   },
   "private": true,
@@ -30,6 +29,7 @@
     "@angular/platform-browser": "~11.1.2",
     "@angular/platform-browser-dynamic": "~11.1.2",
     "@angular/router": "~11.1.2",
+    "prismjs": "^1.25.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
