@@ -1,0 +1,43 @@
+
+
+
+
+<div class="container">
+
+  <h3 class="text-center">Example: Custom Action Templates</h3>
+
+  <div class="mb-2" *ngIf="users && users.length > 0">
+    <ngb5-simple-table  [title]="'User List'"
+                        [dataList]="users"
+                        [columns]="usersColumnsMap"
+                        [staticPagination]="true"
+                        [actionTemplate]="{'Website': exampleTemplate, 'Additional Details': viewTemplate}">
+    </ngb5-simple-table>
+  </div>
+
+  <hr/>
+
+  <app-code-showcase [CS_JSON_DATA]="CS_JSON_DATA"
+                     [CS_HTML_TEMPLATE]="CS_HTML_TEMPLATE"
+                     [CS_TYPESCRIPT]="CS_TYPESCRIPT">
+  </app-code-showcase>
+
+
+</div>
+
+
+<!-- Showing example custom example template  -->
+
+<ng-template #exampleTemplate let-data>
+  <a class="nav-link" href="javascript: void(0);">
+    <span>Example Website: {{data.website}}</span>
+  </a>
+</ng-template>
+
+<ng-template #viewTemplate let-data>
+  <div>
+    <p class="border-bottom border-2">FullName: {{data.name}}</p>
+    <p class="fw-light">Address: {{data?.address?.street}}, {{data?.address?.suite}}, {{data?.address?.city}}</p>
+    <p class="fw-light">Company: {{data?.company?.name}}, {{data?.company?.catchPhrase}}</p>
+  </div>
+</ng-template>

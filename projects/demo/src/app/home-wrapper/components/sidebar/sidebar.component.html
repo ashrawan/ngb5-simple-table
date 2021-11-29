@@ -1,0 +1,23 @@
+
+<div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100 sticky-top">
+
+  <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+<!--    <li class="nav-item my-1">-->
+<!--      <a [routerLink]="APP_ROUTES.HOME" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }"-->
+<!--         class="nav-link align-middle px-0">-->
+<!--        <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline px-1">Ngb5</span>-->
+<!--      </a>-->
+<!--    </li>-->
+    <li *ngFor="let navItem of navItems" class="nav-item my-1">
+      <a [routerLink]="navItem.path" [routerLinkActive]="'active'"
+         class="nav-link align-middle px-0">
+        <span class="ms-1 d-none d-sm-inline px-1">{{navItem.name}}</span>
+      </a>
+    </li>
+
+  </ul>
+  <hr/>
+
+
+
+</div>

@@ -1,0 +1,19 @@
+
+<nav class="navbar navbar-light main-navbar">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold fs-4 text-white" [href]="APP_ROUTES.SIMPLE_TABLE">Ngb5SimpleTable</a>
+    <a class="nav-link border border-2 ms-auto" target="_blank" href="http://github.com/ashrawan/ngb5-simple-table">Github</a>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="row flex-nowrap">
+
+    <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 dash-sidebar">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="col py-4 px-md-4">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
